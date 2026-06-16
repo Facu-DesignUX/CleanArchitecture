@@ -1,0 +1,7 @@
+# Compilación
+bin/
+obj/
+
+# Visual Studio / IDE
+.vs/
+*.user
