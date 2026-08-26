@@ -169,8 +169,8 @@ Dado que vienes de usar estructuras clásicas, tu código tiene mucha sintaxis m
 ### `get; private set;` (Encapsulamiento de Propiedades)
 En vez de crear una variable pública que cualquiera pueda arruinar, se usan propiedades. El `get` permite que cualquiera lea el valor (como `Customer.Email`), pero el `private set` prohíbe que alguien de afuera cambie su valor (`Customer.Email = "hacker@mal.com"` fallaría). Solo la propia clase puede modificarlo.
 ```csharp
-// Todos pueden leer el FullName, pero solo Customer puede modificarlo internamente.
-public FullName FullName { get; private set; } = null!;
+// Todos pueden leer el FirstName, pero solo Customer puede modificarlo internamente.
+public FirstName FirstName { get; private set; } = null!;
 ```
 
 ### El Operador `!` (Null-Forgiving)
