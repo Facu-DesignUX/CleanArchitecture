@@ -12,6 +12,11 @@ public static class DependencyContainer
         services.AddScoped<ICreateCustomerInputPort, CreateCustomerUseCase>();
         services.AddScoped<IUpdateCustomerInputPort, UpdateCustomerUseCase>();
         
+        // Registrar Hubs de Validación
+        services.AddScoped<
+            CommerX.Application.Common.Validation.IModelValidatorHub<CommerX.Application.Customers.DTOs.CreateCustomerRequest>,
+            CommerX.Application.Customers.Validation.CreateCustomerValidatorHub>();
+        
         return services;
     }
 }

@@ -1,9 +1,11 @@
-﻿// CommerX.Application/Customers/UseCases/CreateCustomerUseCase.cs
+// CommerX.Application/Customers/UseCases/CreateCustomerUseCase.cs
+using CommerX.Application.Common.Validation;
 using CommerX.Application.Customers.DTOs;
 using CommerX.Application.Customers.Ports;
 using CommerX.Domain.Common.Exceptions;
 using CommerX.Domain.Customers.Entities;
 using CommerX.Domain.Customers.Repositories;
+using System.Linq;
 
 namespace CommerX.Application.Customers.UseCases;
 
@@ -16,16 +18,30 @@ public sealed class CreateCustomerUseCase : ICreateCustomerInputPort
     // puerto de salida inyectado - notifica el resultado al llamador
     private readonly ICreateCustomerOutputPort _outputPort;
 
+    // hub de validación - valida las precondiciones técnicas del DTO
+    private readonly IModelValidatorHub<CreateCustomerRequest> _validator;
+
     public CreateCustomerUseCase(
         ICustomerRepository repository,
-        ICreateCustomerOutputPort outputPort)
+        ICreateCustomerOutputPort outputPort,
+        IModelValidatorHub<CreateCustomerRequest> validator)
     {
         _repository = repository;
         _outputPort = outputPort;
+        _validator = validator;
     }
 
     public async Task ExecuteAsync(CreateCustomerRequest request)
     {
+        // PASO 1 — Guard Hub: precondiciones técnicas del DTO
+        var errors = _validator.Validate(request).ToList();
+        if (errors.Count > 0)
+        {
+            // notifica todos los errores juntos — el dominio no es invocado
+            await _outputPort.ValidationErrorsAsync(errors);
+            return;
+        }
+
         try
         {
             // verificamos que no exista un cliente con el mismo documento

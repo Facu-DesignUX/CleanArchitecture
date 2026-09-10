@@ -1,4 +1,4 @@
-﻿// CommerX.Application/Customers/Ports/ICreateCustomerOutputPort.cs
+// CommerX.Application/Customers/Ports/ICreateCustomerOutputPort.cs
 using CommerX.Application.Customers.DTOs;
 
 namespace CommerX.Application.Customers.Ports;
@@ -14,4 +14,7 @@ public interface ICreateCustomerOutputPort
 
     // una regla de dominio fue violada - mensaje descriptivo
     Task HandleValidationErrorAsync(string message);
+
+    // errores de validación de precondiciones técnicas
+    Task ValidationErrorsAsync(System.Collections.Generic.IEnumerable<CommerX.Application.Common.Validation.ValidationError> errors);
 }
