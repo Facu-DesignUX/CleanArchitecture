@@ -18,4 +18,16 @@ public class CreateCustomerValidatorHub : IModelValidatorHub<CreateCustomerReque
             .Concat(Guard.Against(model.Phone, nameof(model.Phone)).NotNullOrEmpty().MaxLength(20).Errors)
             .Concat(Guard.Against(model.Address, nameof(model.Address)).NotNullOrEmpty().MaxLength(200).Errors);
     }
+    //Comparar con la forma que no usa concat vista en clase en donde usamos var sumado a . por debajo
+    //UN GUARD POR CAMPO - CADA UNO ACUMULA SUS PROPIOS ERRORES
+    //var gfirstName = Guard .Against(request.FirstName, "FirstName"))
+    //.NotNullOrEmpty().MinLength(2).MaxLength(100);
+
+    //otra forma planteada
+    //var gfirstName = Guard.Against(model.FirstName, nameof(model.FirstName))
+    //    .NotNullOrEmpty()
+    //    .MinLength(2)
+    //    .MaxLength(100);
+    //Aca entendi esto: Que aca es donde pasamos los parametros de validacion, y que cada uno de estos guard acumula sus propios errores,
+    //y que al final los concatenamos todos para devolverlos en un solo IEnumerable<ValidationError>, es asi?
 }
