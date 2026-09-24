@@ -1,9 +1,12 @@
-﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using CommerX.Application.Common.Validation;
 
-public class Class1
+namespace CommerX.Application.Common.Ports;
+
+public interface IBaseOutputPort<T>
 {
-	public Class1()
-	{
-		//
-	}
+    Task HandleSuccessAsync(T response);
+    Task ValidationErrorsAsync(IEnumerable<ValidationError> errors);
+    Task HandleErrorAsync(string message);
 }

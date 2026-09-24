@@ -16,6 +16,10 @@ public static class DependencyContainer
         services.AddScoped<
             CommerX.Application.Common.Validation.IModelValidatorHub<CommerX.Application.Customers.DTOs.CreateCustomerRequest>,
             CommerX.Application.Customers.Validation.CreateCustomerValidatorHub>();
+
+        services.AddScoped<
+            CommerX.Application.Common.Validation.IModelValidatorHub<CommerX.Application.Customers.DTOs.UpdateCustomerRequest>,
+            CommerX.Application.Customers.Validation.UpdateCustomerValidatorHub>();
         
         return services;
     }

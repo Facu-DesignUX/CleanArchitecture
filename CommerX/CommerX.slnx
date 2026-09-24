@@ -5,4 +5,7 @@
   <Folder Name="/2. Aplicaction/">
     <Project Path="2. Application/CommerX.Application.csproj" />
   </Folder>
+  <Folder Name="/3. InterfaceAdapter/">
+    <Project Path="3. InterfaceAdapter/CommerX.InterfaceAdapter.csproj" />
+  </Folder>
 </Solution>

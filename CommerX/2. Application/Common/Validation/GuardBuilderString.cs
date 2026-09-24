@@ -20,10 +20,6 @@ public class GuardBuilderString : GuardBuilderBase<GuardBuilderString>
         }
         return this;
     }
-    //codigo visto en clase (COMPARAR Y BUSCAR PORQUE TERMINO ASI)
-    // public GuardBuilderString NotNullOrEmpty(string? mensaje = null)
-    //if (string.IsNullOrEmpty(_value))
-    //    AddError(mensaje ?? $"El campo no puede ser nulo o vacío.");  
 
     public GuardBuilderString MinLength(int min)
     {
@@ -50,8 +46,5 @@ public class GuardBuilderString : GuardBuilderBase<GuardBuilderString>
             AddError("El campo debe ser una dirección de correo electrónico válida.");
         }
         return this;
-        //En el caso de mail este puso ser un value objet
-        //COMPARAR CON EXpRESION REGEX VISTA EN CLASE
-        //
     }
 }
