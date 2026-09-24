@@ -18,3 +18,5 @@ public interface ICreateCustomerOutputPort
     // errores de validación de precondiciones técnicas
     Task ValidationErrorsAsync(System.Collections.Generic.IEnumerable<CommerX.Application.Common.Validation.ValidationError> errors);
 }
+
+//SACAREMOS LINEA 10 Y 16 OARA USAR OUTPUT PORT BASE, nueva clase, donde contemplamos los ERRORES 
