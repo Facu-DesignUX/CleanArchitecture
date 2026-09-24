@@ -2,7 +2,11 @@
 bin/
 obj/
 
-# Visual Studio / IDE
+# Visual Studio, IDE y VSCODE
 .vs/
+.vscode/
 *.user
-comprobacion.md
+*.suo
+# Test
+TestResults/
+Material de Repaso/
