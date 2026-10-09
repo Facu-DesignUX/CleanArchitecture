@@ -2,11 +2,12 @@ using CommerX.Application.Customers.Ports;
 using CommerX.Application.Customers.UseCases;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CommerX.Application;
+// namespace truco: evita agregar using en Program.cs
+namespace Microsoft.Extensions.DependencyInjection;
 
 public static class DependencyContainer
 {
-    public static IServiceCollection AddApplication(this IServiceCollection services)
+    public static IServiceCollection AddCustomerUseCases(this IServiceCollection services)
     {
         // Registrar Casos de Uso
         services.AddScoped<ICreateCustomerInputPort, CreateCustomerUseCase>();

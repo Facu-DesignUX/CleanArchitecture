@@ -70,3 +70,9 @@ public sealed class CreateCustomerUseCase : ICreateCustomerInputPort
         }
     }
 }
+//oTRA FORMA. dECLARA CONSTRUCTOR PRIVADO Y FUNCUIN PUBLICA, 
+//LA CUAL TRABAJA, 
+//EFECTUA USO DE LOS VALUE OBJETS(SEGUNDA BARRERA TRAS LOS GUARDS)
+//SIENTA EL CUSTOMER EN REPOSITY
+//MANDA EL MENSAJE DE SUSCEFULL
+//detalle, tambien hay parte dedicada que declara inicializados como null todos los atributos

@@ -36,7 +36,7 @@ public sealed class UpdateCustomerUseCase : IUpdateCustomerInputPort
 
         try
         {
-            var customer = await _repository.GetByIdAsync(request.CustomerId);
+            var customer = await _repository.FindByIdAsync(request.CustomerId);
 
             if (customer is null)
             {

@@ -14,6 +14,13 @@ namespace CommerX.Domain.Customers.Repositories;
 // contrato de persistencia Infrastructure lo implementa con EF Core
 public interface ICustomerRepository
 {
+    // verifica si ya existe un cliente con ese número de documento
+    // retorna bool — el UseCase solo necesita saber si existe, no obtener la entidad
+    Task<bool> ExistsByDocumentAsync(string document);
+
+    // verifica si ya existe un cliente registrado con ese email
+    Task<bool> ExistsByEmailAsync(string email);
+
     // busca un cliente por su número de documento
     // devuelve null si no existe
     Task<Customer?> FindByDocumentAsync(string document);
