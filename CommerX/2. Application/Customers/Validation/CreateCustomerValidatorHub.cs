@@ -10,13 +10,29 @@ public class CreateCustomerValidatorHub : IModelValidatorHub<CreateCustomerReque
 {
     public IEnumerable<ValidationError> Validate(CreateCustomerRequest model)
     {
-        return Enumerable.Empty<ValidationError>()
-            .Concat(Guard.Against(model.FirstName, nameof(model.FirstName)).NotNullOrEmpty().MinLength(2).MaxLength(100).Errors)
-            .Concat(Guard.Against(model.LastName, nameof(model.LastName)).NotNullOrEmpty().MinLength(2).MaxLength(100).Errors)
-            .Concat(Guard.Against(model.Document, nameof(model.Document)).NotNullOrEmpty().MinLength(7).MaxLength(8).Errors)
-            .Concat(Guard.Against(model.Email, nameof(model.Email)).NotNullOrEmpty().InvalidEmail().Errors)
-            .Concat(Guard.Against(model.Phone, nameof(model.Phone)).NotNullOrEmpty().MaxLength(20).Errors)
-            .Concat(Guard.Against(model.Address, nameof(model.Address)).NotNullOrEmpty().MaxLength(200).Errors);
-    }
+        var gFirstName = Guard.Against(model.FirstName, "FirstName")
+            .NotNullOrEmpty().MinLength(2).MaxLength(100);
+
+        var gLastName = Guard.Against(model.LastName, "LastName")
+            .NotNullOrEmpty().MinLength(2).MaxLength(100);
+
+        var gDocument = Guard.Against(model.Document, "Document")
+            .NotNullOrEmpty().MinLength(7).MaxLength(8);
+
+        var gEmail = Guard.Against(model.Email, "Email")
+            .NotNullOrEmpty().InvalidEmail();
+
+        var gPhone = Guard.Against(model.Phone, "Phone")
+            .NotNullOrEmpty().MaxLength(20);
+
+        var gAddress = Guard.Against(model.Address, "Address")
+            .NotNullOrEmpty().MaxLength(200);
+
+        return gFirstName.Errors
+            .Concat(gLastName.Errors)
+            .Concat(gDocument.Errors)
+            .Concat(gEmail.Errors)
+            .Concat(gPhone.Errors)
+            .Concat(gAddress.Errors);
     }
 }

@@ -6,5 +6,6 @@ namespace CommerX.Application.Customers.Ports;
 
 public interface ICreateCustomerOutputPort : IBaseOutputPort<CreateCustomerResponse>
 {
-    Task HandleDuplicateAsync(string document);
+    Task HandleDuplicateDocumentAsync(string document);
+    Task HandleDuplicateEmailAsync(string email);
 }

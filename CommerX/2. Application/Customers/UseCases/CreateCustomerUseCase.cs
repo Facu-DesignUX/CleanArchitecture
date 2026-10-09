@@ -37,14 +37,22 @@ public sealed class CreateCustomerUseCase : ICreateCustomerInputPort
 
         try
         {
-            var existing = await _repository.FindByDocumentAsync(request.Document);
-
-            if (existing is not null)
+            // PASO 1 - Unicidad de documento: regla de negocio de la capa Application
+            if (await _repository.ExistsByDocumentAsync(request.Document))
             {
-                await _outputPort.HandleDuplicateAsync(request.Document);
+                // notificamos y salimos - no seguimos procesando
+                await _outputPort.HandleDuplicateDocumentAsync(request.Document);
                 return;
             }
 
+            // PASO 2 - Unicidad de email: también es una regla de unicidad del sistema
+            if (await _repository.ExistsByEmailAsync(request.Email))
+            {
+                await _outputPort.HandleDuplicateEmailAsync(request.Email);
+                return;
+            }
+
+            // PASO 3 - Construcción: el dominio aplica sus invariantes (Value Objects)
             var customer = Customer.Create(
                 request.FirstName,
                 request.LastName,
@@ -55,11 +63,15 @@ public sealed class CreateCustomerUseCase : ICreateCustomerInputPort
                 request.BirthDate
             );
 
+            // PASO 4 - Persistencia: el repositorio agrega la entidad
             await _repository.AddAsync(customer);
 
+            // PASO 5 - Notificación de éxito: construye el DTO de respuesta
             var response = new CreateCustomerResponse
             {
                 CustomerId = customer.Id,
+                FirstName = customer.FirstName.Value,
+                LastName = customer.LastName.Value
             };
 
             await _outputPort.HandleSuccessAsync(response);

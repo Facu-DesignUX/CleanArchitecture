@@ -8,10 +8,17 @@ namespace CommerX.InterfaceAdapter.Customers.Presenters;
 
 public sealed class CreateCustomerPresenter : BasePresenter<CreateCustomerResponse>, ICreateCustomerOutputPort
 {
-    public Task HandleDuplicateAsync(string document)
+    public CreateCustomerResponse Response => Result?.Value ?? default!;
+
+    public Task HandleDuplicateDocumentAsync(string document)
     {
-        // Guardamos el error específico del UseCase en el resultado base
-        Result = OperationResult<CreateCustomerResponse>.Fail($"Ya existe un cliente registrado con el documento: {document}");
+        Result = OperationResult<CreateCustomerResponse>.Fail($"El documento {document} ya está registrado.");
+        return Task.CompletedTask;
+    }
+
+    public Task HandleDuplicateEmailAsync(string email)
+    {
+        Result = OperationResult<CreateCustomerResponse>.Fail($"El email {email} ya está registrado.");
         return Task.CompletedTask;
     }
 }
