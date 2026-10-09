@@ -63,6 +63,10 @@ public sealed class UpdateCustomerUseCase : IUpdateCustomerInputPort
             var response = new UpdateCustomerResponse
             {
                 CustomerId = customer.Id,
+                Email = customer.Email.Value,
+                Phone = customer.Phone.Value,
+                Address = customer.Address.Value,
+                BirthDate = customer.BirthDate.Value
             };
 
             await _outputPort.HandleSuccessAsync(response);
