@@ -1,0 +1,31 @@
+@* CreateCustomer.razor *@
+@inherits OwningComponentBase<CreateCustomerViewModel>
+
+<h3>CU-CLI-001 — Alta de Cliente</h3>
+
+<label>Nombre</label>
+<input @bind="Service.FirstName" />
+
+<label>Apellido</label>
+<input @bind="Service.LastName" />
+
+<label>Documento</label>
+<input @bind="Service.Document" />
+
+<label>Email</label>
+<input @bind="Service.Email" />
+
+<label>Teléfono</label>
+<input @bind="Service.Phone" />
+
+<label>Domicilio</label>
+<input @bind="Service.Address" />
+
+<label>Fecha de nacimiento</label>
+<input type="date" @bind="Service.BirthDate" />
+
+<button @onclick="Service.GuardarAsync" disabled="@Service.EnCurso">
+    Guardar
+</button>
+
+<p>@Service.Mensaje</p>
