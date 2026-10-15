@@ -19,10 +19,18 @@ public static class DependencyContainer
         return services;
     }
 
-    // NUEVO — método propio para el ViewModel, mismo ciclo de vida que el Presenter
     public static IServiceCollection AddCustomerViewModel(this IServiceCollection services)
     {
         services.AddScoped<CreateCustomerViewModel>();
+
+        return services;
+    }
+
+    public static IServiceCollection AddUpdateCustomerPresenter(this IServiceCollection services)
+    {
+        services.AddScoped<UpdateCustomerPresenter>();
+        services.AddScoped<IUpdateCustomerOutputPort>(
+            sp => sp.GetRequiredService<UpdateCustomerPresenter>());
 
         return services;
     }

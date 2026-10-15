@@ -27,6 +27,7 @@ public interface ICustomerRepository
 
     // busca un cliente por su Id
     Task<Customer?> FindByIdAsync(Guid id);
+    Task<Customer?> GetByIdAsync(Guid id) => FindByIdAsync(id);
 
     // busca un cliente por su email
     Task<Customer?> FindByEmailAsync(string email);

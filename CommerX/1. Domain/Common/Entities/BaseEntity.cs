@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,17 +10,17 @@ namespace CommerX.Domain.Common.Entities
         // protected set: el constructor base lo asigna; las subclases pueden leerlo
         public Guid Id { get; protected set; }
 
-        // ── Auditoría de creación ─────────────────────────────────────────────
-        // CreatedBy: Id del usuario que creó el registro (Guid.Empty = no asignado)
-        public Guid CreatedBy { get; protected set; }
-        // CreatedOn: fecha y hora UTC en que se creó el registro
-        public DateTime CreatedOn { get; protected set; }
+        // ── Auditoría de creación y modificación (Módulo 8) ───────────────────
+        // CreatedAt solo tiene getter (EF Core requiere mapeo explícito)
+        public DateTime CreatedAt { get; } = DateTime.UtcNow;
+        // UpdatedAt tiene get y set
+        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
-        // ── Auditoría de modificación ─────────────────────────────────────────
-        // ModifiedBy: Id del usuario de la última modificación (Guid.Empty = nunca modificado)
+        // ── Auditoría histórica (retrocompatibilidad) ─────────────────────────
+        public Guid CreatedBy { get; protected set; }
+        public DateTime CreatedOn => CreatedAt;
         public Guid ModifiedBy { get; protected set; }
-        // ModifiedOn: DateTime? — el "?" indica que puede ser null (nunca modificado)
-        public DateTime? ModifiedOn { get; protected set; }
+        public DateTime? ModifiedOn => UpdatedAt;
         // ── Constructor protegido con parámetros opcionales ───────────────────
         // "default" como valor por defecto permite que el mismo constructor
         // sirva para crear entidades nuevas Y para materialización con EF Core
@@ -32,10 +32,10 @@ namespace CommerX.Domain.Common.Entities
             // si llegó default (todos ceros) → generar valor nuevo; si llegó real → conservarlo
             Id = id == default ? Guid.NewGuid() : id;
             CreatedBy = createdBy == default ? Guid.Empty : createdBy;
-            CreatedOn = createdOn == default ? DateTime.UtcNow : createdOn;
-            // auditoría de modificación: inicia vacía, se completa en Módulo 8
+            CreatedAt = createdOn == default ? DateTime.UtcNow : createdOn;
+            // auditoría de modificación: inicia con la fecha de creación
             ModifiedBy = Guid.Empty;
-            ModifiedOn = null;
+            UpdatedAt = DateTime.UtcNow;
         }
     }
 }

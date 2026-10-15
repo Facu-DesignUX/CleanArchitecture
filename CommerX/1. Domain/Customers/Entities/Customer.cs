@@ -15,8 +15,19 @@ public sealed class Customer : BaseEntity
     public Address Address { get; private set; } = null!;
     public BirthDate BirthDate { get; private set; } = null!;
 
-    // constructor privado vacío requerido por EF Core para materialización
-    private Customer() { }
+    // constructor sin parámetros — solo lo usa Entity Framework Core para reconstruir el Customer desde la base
+    // EF no puede enlazar Value Objects por constructor: crea la instancia vacía y completa las propiedades por reflexión
+    // al ser privado, el código de negocio sigue obligado a pasar por Create()
+    private Customer()
+    {
+        FirstName = null!;
+        LastName = null!;
+        Document = null!;
+        Email = null!;
+        Phone = null!;
+        Address = null!;
+        BirthDate = null!;
+    }
 
     // método estático de fábrica única puerta de entrada
     public static Customer Create(
