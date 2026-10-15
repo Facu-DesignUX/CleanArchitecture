@@ -9,4 +9,7 @@
     <Project Path="3. InterfaceAdapter.Views/CommerX.InterfaceAdapter.Views.csproj" />
     <Project Path="3. InterfaceAdapter/CommerX.InterfaceAdapter.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/CommerX.InterfaceAdapter.Tests/CommerX.InterfaceAdapter.Tests.csproj" />
+  </Folder>
 </Solution>
