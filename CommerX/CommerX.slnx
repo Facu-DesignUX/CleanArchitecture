@@ -11,8 +11,10 @@
   </Folder>
   <Folder Name="/4. Infrastructure/">
     <Project Path="4. Infrastructure/CommerX.Infrastructure.csproj" />
+    <Project Path="CommerX.Desktop/CommerX.Desktop.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/CommerX.InterfaceAdapter.Tests/CommerX.InterfaceAdapter.Tests.csproj" />
+    <Project Path="tests/CommerX.Desktop.Tests/CommerX.Desktop.Tests.csproj" />
   </Folder>
 </Solution>

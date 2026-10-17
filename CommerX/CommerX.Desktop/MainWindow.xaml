@@ -1,0 +1,12 @@
+<Window x:Class="CommerX.Desktop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="CommerX" Height="260" Width="480"
+        WindowStartupLocation="CenterScreen"
+        Loaded="OnLoaded">
+    <StackPanel Margin="24" VerticalAlignment="Center">
+        <TextBlock Text="CommerX" FontSize="28" FontWeight="Bold" />
+        <TextBlock x:Name="StatusText" Text="Base de datos: sin comprobar" Margin="0,12,0,12" FontSize="14" />
+        <Button Content="Comprobar conexión" Click="OnCheckConnection" Padding="12,6" HorizontalAlignment="Left" />
+    </StackPanel>
+</Window>
